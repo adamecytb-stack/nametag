@@ -1,7 +1,8 @@
 {
-  "name": "Nametag",
-  "short_name": "Nametag",
-  "description": "Point your camera at people and things, give them names, and remember where you last saw them.",
+  "name": "Karty",
+  "short_name": "Karty",
+  "description": "Namier kameru na hracie karty a poradí ti, čo hrať: blackjack, poker, žolík.",
+  "lang": "sk",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

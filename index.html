@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="sk">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Nametag</title>
-  <meta name="description" content="Point your camera at people and things, give them names, and remember where you last saw them.">
+  <title>Karty</title>
+  <meta name="description" content="Namier kameru na hracie karty a poradí ti, čo hrať: blackjack, poker, žolík.">
   <meta name="theme-color" content="#000000">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Nametag">
+  <meta name="apple-mobile-web-app-title" content="Karty">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -21,35 +21,39 @@
   <canvas id="overlay"></canvas>
 
   <header id="top" class="top">
-    <button id="placeBtn" class="place" type="button">
-      <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
-      <span id="placeText">Name this place</span>
-    </button>
-    <button id="settingsBtn" class="round" type="button" aria-label="Settings">
+    <nav id="games" class="games" aria-label="Hra">
+      <button type="button" data-game="blackjack">Blackjack</button>
+      <button type="button" data-game="poker">Poker</button>
+      <button type="button" data-game="zolik">Žolík</button>
+    </nav>
+    <button id="settingsBtn" class="round" type="button" aria-label="Nastavenia">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h9M19 7h1M4 17h1M11 17h9"/><circle cx="16" cy="7" r="2.6"/><circle cx="8" cy="17" r="2.6"/></svg>
     </button>
   </header>
 
-  <p id="hint" class="hint" hidden></p>
+  <section id="advice" class="advice" aria-live="polite">
+    <p id="action" class="action"></p>
+    <ul id="lines" class="lines"></ul>
+    <div id="extras" class="extras"></div>
+  </section>
 
   <footer id="bottom" class="bottom">
-    <button id="savedBtn" class="pill" type="button">Saved <span id="savedCount" class="count">0</span></button>
-    <button id="shutter" class="shutter" type="button" aria-label="Freeze the picture">
+    <button id="roundBtn" class="pill" type="button">Nové kolo</button>
+    <button id="shutter" class="shutter" type="button" aria-label="Zastaviť obraz">
       <svg class="icon-pause" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="5.5" y="4" width="4.5" height="16" rx="1.6" fill="currentColor"/><rect x="14" y="4" width="4.5" height="16" rx="1.6" fill="currentColor"/></svg>
       <svg class="icon-play" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M8 4.8v14.4a1 1 0 0 0 1.5.9l12-7.2a1 1 0 0 0 0-1.8l-12-7.2A1 1 0 0 0 8 4.8z" fill="currentColor"/></svg>
     </button>
-    <button id="photoBtn" class="pill" type="button">Photo</button>
+    <button id="addBtn" class="pill" type="button">+ Karta</button>
   </footer>
   <input id="photoInput" type="file" accept="image/*" hidden>
-  <input id="backupInput" type="file" accept="application/json,.json" hidden>
 
   <section id="boot" class="boot">
-    <h1 class="boot-name">Nametag</h1>
-    <p id="bootStatus" class="boot-status">Getting ready</p>
-    <p id="bootNote" class="boot-note">The first launch downloads about 30 MB of recognition models. After that it works offline.</p>
+    <h1 class="boot-name">Karty</h1>
+    <p id="bootStatus" class="boot-status">Pripravujem sa</p>
+    <p id="bootNote" class="boot-note">Prvé spustenie stiahne asi 20 MB (model na rozpoznávanie kariet). Potom to funguje aj bez internetu.</p>
     <div id="bootActions" class="boot-actions" hidden>
-      <button id="retryBtn" class="btn on-dark" type="button">Try again</button>
-      <button id="bootPhotoBtn" class="btn on-dark outline" type="button">Use a photo</button>
+      <button id="retryBtn" class="btn on-dark" type="button">Skúsiť znova</button>
+      <button id="bootPhotoBtn" class="btn on-dark outline" type="button">Použiť fotku</button>
     </div>
   </section>
 
